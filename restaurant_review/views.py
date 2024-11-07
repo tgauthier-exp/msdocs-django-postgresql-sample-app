@@ -21,12 +21,9 @@ def index(request):
     firstFact = facts.json()
     print(firstFact)
 
-    print("token store status code")
-    tokenStore = requests.get("/.auth/me")
-    print(tokenStore.status_code)
-
-    tokenStoreJson = tokenStore.json
-    print(tokenStoreJson)
+    print("token store status code:")
+    r = requests.get("/.auth/me")
+    print(r.status_code)
 
     return render(request, 'restaurant_review/index.html', {'LastViewedRestaurant': lastViewedRestaurant, 'restaurants': restaurants})
 
