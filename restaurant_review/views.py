@@ -21,8 +21,8 @@ def index(request):
     firstFact = facts.json()
     print(firstFact)
 
-    tokenStore = requests.get("/.auth/me")
     print("token store status code")
+    tokenStore = requests.get("/.auth/me")
     print(tokenStore.status_code)
 
     tokenStoreJson = tokenStore.json
