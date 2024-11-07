@@ -21,9 +21,14 @@ def index(request):
     firstFact = facts.json()
     print(firstFact)
 
-    print("token store status code:")
+    print('Request for token store')
     r = requests.get("/.auth/me")
-    print(r.json())
+    print('Convert result to json')
+    r.json()
+    print('Access first element of array')
+    me = r[0]
+    print('Display access token')
+    print(me.access_token)
 
     return render(request, 'restaurant_review/index.html', {'LastViewedRestaurant': lastViewedRestaurant, 'restaurants': restaurants})
 
