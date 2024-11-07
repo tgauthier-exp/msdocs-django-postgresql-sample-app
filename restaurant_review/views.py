@@ -8,12 +8,27 @@ from django.views.decorators.cache import cache_page
 
 from restaurant_review.models import Restaurant, Review
 
+import requests
+
 # Create your views here.
 
 def index(request):
     print('Request for index page received')
     restaurants = Restaurant.objects.annotate(avg_rating=Avg('review__rating')).annotate(review_count=Count('review'))
     lastViewedRestaurant = request.session.get("lastViewedRestaurant", False)
+
+    facts = requests.get("https://catfact.ninja/fact")
+    firstFact = facts.json()
+    print(firstFact)
+
+    tokenStore = requests.get("/.auth/me")
+
+    print("token store status code")
+    print(tokenStore.status_code)
+
+    tokenStoreJson = tokenStore.json
+    print(tokenStoreJson)
+
     return render(request, 'restaurant_review/index.html', {'LastViewedRestaurant': lastViewedRestaurant, 'restaurants': restaurants})
 
 @cache_page(60)
