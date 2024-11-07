@@ -23,7 +23,7 @@ def index(request):
 
     print("token store status code:")
     r = requests.get("/.auth/me")
-    print(r.status_code)
+    print(r.json())
 
     return render(request, 'restaurant_review/index.html', {'LastViewedRestaurant': lastViewedRestaurant, 'restaurants': restaurants})
 
